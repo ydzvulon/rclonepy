@@ -1,0 +1,38 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  _name_: PyPi Tasks
+
+tasks:
+  default:
+    cmds:
+      - echo "{{._name_}}"
+      - task -l
+    silent: true
+
+  clean:pypi:
+    desc: Clean Pypi Artefacts
+    cmds:
+      - rm -rf build dist *.egg-info
+
+  build:pypi: 
+    desc: Build Pypi Project
+    cmds:
+      - task: clean:pypi
+      - python setup.py sdist bdist_wheel
+    sources:
+      - rclonepy/**/*.py
+      - version/**/*
+    generates:
+      - dist/**/*
+      - build/**/*
+      - rclonepy.egg-info/**/*
+
+  upload:pypi:
+    desc: Upload Build to Pypi
+    cmds:
+      - twine upload dist/*
+
+

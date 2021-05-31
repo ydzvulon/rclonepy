@@ -2,6 +2,11 @@
 
 version: '3'
 
+includes:
+  pypi:
+    taskfile: ./tasks/pypi.tasks.yml
+    dir: .
+
 vars:
   GREETING: Hello, World!
 

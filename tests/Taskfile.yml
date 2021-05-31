@@ -26,3 +26,8 @@ tasks:
       - task: ensure-test-plex
     cmds:
       - task: run-all
+  
+  clean:
+    desc: _
+    cmds:
+      - rm -rf  .pytest_cache __pycache__

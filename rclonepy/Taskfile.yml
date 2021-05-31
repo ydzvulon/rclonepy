@@ -1,40 +1,7 @@
 # https://taskfile.dev
 
 version: '3'
-
-vars:
-  GREETING: Hello, World!
-
-tasks:
-  default:
-    cmds:
-      - echo "{{.GREETING}}"
-      - task -l
-    silent: true
-
-  build:
-    desc: _
+includes:
+  pypi:
+    taskfile: ../tasks/pypi.tasks.yml
     dir: ..
-    cmds:
-      - python setup.py sdist bdist_wheel
-
-  upload:
-    desc: _
-    dir: ..
-    cmds:
-      - twine upload dist/*
-
-  register-project:
-    desc: _
-    dir: ..
-    cmds:
-      - python setup.py register
-
-  clean:
-    desc: _
-    dir: ..
-    cmds:
-      - rm -rf build dist *.egg-info
-      # - find . -name '.pytest_cache' 
-      # - find . -name '__pycache__'
-
