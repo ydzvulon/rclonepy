@@ -18,33 +18,6 @@ def sh(cmd, **kw):
     res = shell.run(cmd_tokens, update_env=update_env)
     return res.output.decode()
 
-def tree(source:Path) -> str:
-    """
-    rclone tree lists the contents of a remote in a similar way to the
-    unix tree command.
-
-    For example
-
-        $ rclone tree remote:path
-        /
-        ├── file1
-        ├── file2
-        ├── file3
-        └── subdir
-            ├── file4
-            └── file5
-        
-        1 directories, 5 files
-
-    You can use any of the filtering options with the tree command (e.g.
-    --include and --exclude).  You can also use --fast-list.
-
-    The tree command has many options for controlling the listing which
-    are compatible with the tree command.  Note that not all of them have
-    short options as they conflict with rclone's short options.
-    """
-    return sh(f"rclone tree {source}")
-
 def lsjson(source:Path, recursive=False):
     """  * `lsjson` to list objects and directories in JSON format
     """

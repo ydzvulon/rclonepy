@@ -1,0 +1,20 @@
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  size:
+    desc: Prints the total size and number of objects in remote:path
+    args: source=str json=bool
+    cmds:
+      - rclone size {{.source}} {{flags}}
+  tree:
+    desc: asdf
+    args: source=str flags=[include, exclude, fast]
+    cmds:
+      - rclone size {{.source}} {{flags}}
+
+
+

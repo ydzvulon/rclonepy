@@ -1,5 +1,11 @@
-from re import I
+from pydantic import BaseModel
 from rclonepy.ifaces.shell_actor_iface import ShellActorIface
+
+
+class RcloneCmdTree(BaseModel):
+    nid = 'tree'
+    cmd = "rclone {cid} {source} {dest}"
+    source: str
 
 def tree(actor: ShellActorIface, source: str) -> str:
     """
@@ -26,4 +32,10 @@ def tree(actor: ShellActorIface, source: str) -> str:
     are compatible with the tree command.  Note that not all of them have
     short options as they conflict with rclone's short options.
     """
-    return actor.runcmd(f"rclone tree {source}")
+    ucmd = RcloneCmdTree(source=source)
+    if actor:
+        res = actor.runcmd(ucmd)
+    else:
+        res = ucmd
+    return res
+
