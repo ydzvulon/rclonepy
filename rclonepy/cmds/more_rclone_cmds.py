@@ -1,15 +1,11 @@
 
 
-def copy(source:Path, dest:Path):
-    return sh(f"rclone copy {source} {dest}")
-
-def copyto(source:Path, dest:Path):
-    return sh(f"rclone copyto {source} {dest}")
 
 def get_data(source):
     import io
     import time
     import os
+    import spur
     shell = spur.LocalShell()
 
     output_file = io.StringIO()
@@ -27,6 +23,3 @@ def get_data(source):
     data = output_file.getvalue()
     # print(data)
     return data
-
-
-    
