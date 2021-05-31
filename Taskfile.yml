@@ -16,4 +16,4 @@ tasks:
   test:
     desc: _
     cmds:
-      - task run-all -d tests
+      - task run-all:full -d tests

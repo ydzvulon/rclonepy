@@ -2,11 +2,15 @@ version: '3'
 # dotenv: ['.env']
 vars:
   _taskfilename_: Taskfile.yml
-# includes:
-#   stacks: tasks.stacks.tasks.yml
 
 tasks:
-  
+
+  ensure-test-plex:
+    desc: _
+    dir: ..
+    cmds:
+      - task stacks:spin:up/local-infra-ring -d decks
+
   run-all:
     desc: _
     dir: ..
@@ -14,7 +18,11 @@ tasks:
       RCLONE_CONFIG: $(realpath decks/local-infra-ring/rclone.conf.host-ext-net.conf.toml)
     cmds:
       - pytest -s --workers 5 tests
-  
-  # test: 
-  #   - task: stacks:spin:up/local-infra-ring
-  #   - pytest tests src -s
+
+  run-all:full:
+    desc: _
+    dir: ..
+    deps:
+      - task: ensure-test-plex
+    cmds:
+      - task: run-all
