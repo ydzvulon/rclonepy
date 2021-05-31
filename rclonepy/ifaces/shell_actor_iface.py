@@ -1,7 +1,17 @@
 
+from tkinter import E
+
+
 class ShellActorIface:
     def runcmd(self, cmd, **kw):
         return NotImplementedError
+
+    @staticmethod
+    def runcmd_safe(actor: 'ShellActorIface', cmd):
+        res = actor.runcmd(cmd) if actor else cmd
+        return res
+        
+
 
 class ProcResult:
     return_code: int
