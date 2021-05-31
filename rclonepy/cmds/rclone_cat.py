@@ -1,8 +1,5 @@
-from tkinter.messagebox import NO
 from typing_extensions import Literal
-
 from rclonepy.ifaces.cmds_iface import RcloneCmd
-from pydantic import BaseModel
 from rclonepy.ifaces.shell_actor_iface import ShellActorIface
 
 
@@ -28,13 +25,13 @@ def cat(actor: ShellActorIface, source: str, flags=None) -> str:
     ucmd = RcloneCmdItem(source=source, flags=flags)
     res = ShellActorIface.runcmd_safe(actor, ucmd)
     return res
-    
-_impl_func_ = cat
+
+impl_method = cat
 
 class RcloneCmdItem(RcloneCmd):
-    __doc__ = _impl_func_.__doc__
+    __doc__ = impl_method.__doc__
 
-    cmdname: Literal['size'] = 'size'
+    cmdname: Literal['cat'] = 'cat'
     class Config:
-        method = _impl_func_
+        method = impl_method
 

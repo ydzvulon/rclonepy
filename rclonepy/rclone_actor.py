@@ -1,6 +1,6 @@
 
 import os
-from rclonepy.cmds.rclone_cmds import RcloneCmdsMixin
+from rclonepy.cmds.list_rclone_cmds import RcloneCmdsMixin
 import re
 import shlex
 from functools import lru_cache
