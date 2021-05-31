@@ -11,7 +11,7 @@ class ProjectLayoutPy:
     project_name__txt = 'version/project_name.txt'
     project_props__json = 'version/project_props.json'
     version_prefix__txt = 'version/version_prefix.txt'
-    run_reqs__txt = 'rclonepy/requremets.txt'
+    run_reqs__txt = 'rclonepy/requirements.txt'
 
 
 class _values_:
@@ -19,7 +19,10 @@ class _values_:
     packages=[name]
     version = read_file(ProjectLayoutPy.version_prefix__txt)
     long_description = read_file("README.md")
-    install_requires= read_file(ProjectLayoutPy.run_reqs__txt)
+    install_requires= [
+        l.strip() if l[0]!='"' else l[1:-1].strip()   
+        for l in read_file(ProjectLayoutPy.run_reqs__txt).splitlines()]
+    print(install_requires)
 
     props = json.loads(read_file(ProjectLayoutPy.project_props__json))
 
@@ -41,7 +44,7 @@ setup(
     long_description=_values_.long_description,
     packages=_values_.packages,
     install_requires=_values_.install_requires,
-    
+
     **_values_.get_rest(fetch_fields={
         # map by string
         "author": "author",
