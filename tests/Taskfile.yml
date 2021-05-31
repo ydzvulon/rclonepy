@@ -13,7 +13,7 @@ tasks:
     env:
       RCLONE_CONFIG: $(realpath decks/local-infra-ring/rclone.conf.host-ext-net.conf.toml)
     cmds:
-      - pytest -s tests
+      - pytest -s --workers 5 tests
   
   # test: 
   #   - task: stacks:spin:up/local-infra-ring
