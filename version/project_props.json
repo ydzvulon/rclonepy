@@ -1,0 +1,17 @@
+{
+    "description": "Run commands and manipulate files locally or over SSH using the same interface",
+    "author": "Yair Dar",
+    "author_email": "yair.dar@outlook.org",
+    "url": "https://github.com/ydlibs/rclonepy",
+    "keywords": "rclone s3 copy sync rsync",
+    "license": "Apache License 2.0",
+    "classifiers": [
+        "Development Status :: 4 - Beta",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Topic :: Internet"
+    ]
+}
