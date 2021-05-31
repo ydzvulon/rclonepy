@@ -17,3 +17,24 @@ tasks:
     dir: ..
     cmds:
       - python setup.py sdist bdist_wheel
+
+  upload:
+    desc: _
+    dir: ..
+    cmds:
+      - python setup.py sdist upload
+
+  register-project:
+    desc: _
+    dir: ..
+    cmds:
+      - python setup.py sdist bdist_wheel
+
+  clean:
+    desc: _
+    dir: ..
+    cmds:
+      - rm -rf build dist *.egg-info
+      # - find . -name '.pytest_cache' 
+      # - find . -name '__pycache__'
+
