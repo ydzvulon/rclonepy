@@ -28,7 +28,7 @@ tasks:
     desc: _
     dir: ..
     cmds:
-      - python setup.py sdist bdist_wheel
+      - python setup.py register
 
   clean:
     desc: _
