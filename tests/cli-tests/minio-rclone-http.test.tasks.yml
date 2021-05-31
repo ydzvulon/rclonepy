@@ -1,7 +1,7 @@
 version: '3'
 vars:
   _taskfilename_: minio-rclone-http.test.tasks.yml
-  RCLONE_CONFIG_FILE__HOST_EXT: ./vparts/rclone.conf.host-ext-net.conf.toml
+  RCLONE_CONFIG_FILE__HOST_EXT: decks/local-infra-ring/rclone.conf.host-ext-net.conf.toml
 tasks:
 
   test-create-buckets-one:
