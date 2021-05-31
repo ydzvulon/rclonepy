@@ -1,5 +1,5 @@
 {
-    "description": "Run commands and manipulate files locally or over SSH using the same interface",
+    "description": "Provides Pythonic API to rclone tool",
     "author": "Yair Dar",
     "author_email": "yair.dar@outlook.org",
     "url": "https://github.com/ydlibs/rclonepy",

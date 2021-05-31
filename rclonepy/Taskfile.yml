@@ -22,7 +22,7 @@ tasks:
     desc: _
     dir: ..
     cmds:
-      - python setup.py sdist upload
+      - twine upload dist/*
 
   register-project:
     desc: _
