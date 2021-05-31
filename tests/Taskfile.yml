@@ -1,0 +1,20 @@
+version: '3'
+# dotenv: ['.env']
+vars:
+  _taskfilename_: Taskfile.yml
+# includes:
+#   stacks: tasks.stacks.tasks.yml
+
+tasks:
+  
+  run-all:
+    desc: _
+    dir: ..
+    env:
+      RCLONE_CONFIG: $(realpath decks/local-infra-ring/rclone.conf.host-ext-net.conf.toml)
+    cmds:
+      - pytest -s tests
+  
+  # test: 
+  #   - task: stacks:spin:up/local-infra-ring
+  #   - pytest tests src -s

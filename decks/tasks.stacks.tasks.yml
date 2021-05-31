@@ -1,0 +1,41 @@
+version: '3'
+tasks:
+  ensure:network:
+    desc: _
+    cmds:
+      - docker network create -d bridge ${DECK_DCL_NETWORK}
+    status:
+      - docker network inspect ${DECK_DCL_NETWORK} | jq '.[0].Driver' | grep -v Bridge
+
+  exec:one:
+    desc: _
+    cmds:
+      - |-
+        docker-compose \
+        -f {{.deck}}/docker-compose.yml \
+        {{.cmd}}
+
+  pull:one:
+    desc: _
+    cmds: 
+    - task: exec:one
+      vars:
+        cmd: pull
+        deck: '{{default "local-infra-ring" .deck}}'
+  
+  spind:one:
+    desc: _
+    deps:
+      - task: ensure:network
+    cmds: 
+    - task: exec:one
+      vars:
+        cmd: up -d
+        deck: '{{default "local-infra-ring" .deck}}'
+
+  spin:up/local-infra-ring:
+    desc: _
+    cmds:
+    - task: spind:one
+      vars:
+        deck: "local-infra-ring"

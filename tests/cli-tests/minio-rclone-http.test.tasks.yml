@@ -1,0 +1,17 @@
+version: '3'
+vars:
+  _taskfilename_: minio-rclone-http.test.tasks.yml
+  RCLONE_CONFIG_FILE__HOST_EXT: ./vparts/rclone.conf.host-ext-net.conf.toml
+tasks:
+
+  test-create-buckets-one:
+    desc: "create bucktest"
+    env:
+      RCLONE_CONFIG: "../../{{.RCLONE_CONFIG_FILE__HOST_EXT}}"
+    cmds:
+      - echo "$RCLONE_CONFIG"
+      - rclone purge lms3:tb-first-id || true
+      - rclone mkdir lms3:tb-first-id
+      - |
+        rclone lsd lms3: | grep tb-first-id
+    prefix: "{{._taskfilename_}}:{{.TASK}}"

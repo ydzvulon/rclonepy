@@ -1,0 +1,15 @@
+version: '3'
+dotenv: ['.env']
+vars:
+  _taskfilename_: Taskfile.yml
+includes:
+  stacks: tasks.stacks.tasks.yml
+
+tasks:
+  
+  build:
+    - docker compose pull
+  
+  # test: 
+  #   - task: stacks:spin:up/local-infra-ring
+  #   - pytest tests src -s

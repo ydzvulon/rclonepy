@@ -1,0 +1,12 @@
+[lms3]
+type = s3
+env_auth = false
+access_key_id = admin
+secret_access_key = password
+region = us-east-1
+endpoint = http://127.0.0.1:27007
+
+[lmhttp]
+type = http
+url = http://localhost:8043
+
