@@ -1,4 +1,5 @@
 
+import json
 import os
 from rclonepy.cmds.list_rclone_cmds import RcloneCmdsMixin
 import re
@@ -33,7 +34,18 @@ class RcloneActor(ShellActorIface, RcloneCmdsMixin):
         else:
             update_env = {}
         res_raw = shell.run(cmd_tokens, update_env=update_env)
-        res =  res_raw.output.decode()
+        text_res =  res_raw.output.decode()
+        
+        _asjsono = kw.pop('_asjsono', False)
+        _toschema = kw.pop('_toschema', False)
+        
+        if _asjsono:
+            res = json.loads(text_res)
+        elif _toschema:
+            oj_list = json.loads(text_res)
+            res = [_toschema(**it) for it in oj_list]
+        else:
+            res = text_res
         return res
 
 
@@ -42,8 +54,22 @@ class ProcessHolder:
         self.seed = seed
         self.proceess = process
     
-    def get_result(self):
-        return self.proceess.wait_for_result()
+    def get_result(self, **kw):
+        res_raw = self.proceess.wait_for_result()
+    
+        text_res =  res_raw.output.decode()
+            
+        _asjsono = kw.pop('_asjsono', False)
+        _toschema = kw.pop('_toschema', False)
+        
+        if _asjsono:
+            res = json.loads(text_res)
+        elif _toschema:
+            oj_list = json.loads(text_res)
+            res = [_toschema(**it) for it in oj_list]
+        else:
+            res = text_res
+        return res
 
 class RcloneAsync(ShellActorIface, RcloneCmdsMixin):
 

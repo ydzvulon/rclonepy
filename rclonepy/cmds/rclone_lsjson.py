@@ -1,9 +1,10 @@
+from pydantic import BaseModel
 from typing_extensions import Literal
 from rclonepy.ifaces.cmds_iface import RcloneCmd
 from rclonepy.ifaces.shell_actor_iface import ShellActorIface
 
 
-def lsjson(actor: ShellActorIface, source: str, flags=None) -> str:
+def lsjson(actor: ShellActorIface, source: str, flags=None, **kw) -> str:
     """rclone cat sends any files to standard output.
     List directories and objects in the path in JSON format.
     The output is an array of Items, where each Item looks like this
@@ -43,7 +44,7 @@ def lsjson(actor: ShellActorIface, source: str, flags=None) -> str:
     -R, --recursive               Recurse into the listing.
     """
     ucmd = RcloneCmdItem(source=source, flags=flags)
-    res = ShellActorIface.runcmd_safe(actor, ucmd)
+    res = ShellActorIface.runcmd_safe(actor, ucmd, **kw)
     return res
 
 impl_method = lsjson
@@ -54,4 +55,3 @@ class RcloneCmdItem(RcloneCmd):
     cmdname: Literal['lsjson'] = 'lsjson'
     class Config:
         method = impl_method
-

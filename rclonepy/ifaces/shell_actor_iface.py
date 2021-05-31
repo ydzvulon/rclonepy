@@ -7,8 +7,8 @@ class ShellActorIface:
         return NotImplementedError
 
     @staticmethod
-    def runcmd_safe(actor: 'ShellActorIface', cmd):
-        res = actor.runcmd(cmd) if actor else cmd
+    def runcmd_safe(actor: 'ShellActorIface', cmd, **kw):
+        res = actor.runcmd(cmd, **kw) if actor else cmd
         return res
         
 
