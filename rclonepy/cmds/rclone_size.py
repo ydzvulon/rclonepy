@@ -5,7 +5,7 @@ from rclonepy.ifaces.cmds_iface import RcloneCmd
 from pydantic import BaseModel
 from rclonepy.ifaces.shell_actor_iface import ShellActorIface
 
-def size(actor: ShellActorIface, source: str, flags=None) -> str:
+def size(actor: ShellActorIface, source: str, flags=None, **kw) -> str:
     """
     Prints the total size and number of objects in remote:path.
 
@@ -14,10 +14,7 @@ def size(actor: ShellActorIface, source: str, flags=None) -> str:
         --json   format output as JSON
     """
     ucmd = RcloneSizeCmd(source=source, flags=flags)
-    if actor:
-        res = actor.runcmd(ucmd)
-    else:
-        res = ucmd
+    res = ShellActorIface.runcmd_safe(actor, ucmd, **kw)
     return res
 
 class RcloneSizeCmd(RcloneCmd):

@@ -1,10 +1,6 @@
 from pathlib import Path
 
-from rclonepy.rclone_actor import ProcessHolder, RcloneAsync, RcloneActor
-
-
-def _get_rclone_async() ->RcloneAsync:
-    return RcloneAsync()
+from rclonepy.rclone_actor import ProcessHolder, RcloneActor
 
 def _get_rclone_sync() ->RcloneActor:
     return RcloneActor()

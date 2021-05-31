@@ -3,11 +3,8 @@ from pathlib import Path
 from typing import List
 from rclonepy.schemas.rclone_path_item import RclonePathItem
 
-from rclonepy.rclone_actor import ProcessHolder, RcloneAsync, RcloneActor
+from rclonepy.rclone_actor import ProcessHolder, RcloneActor
 
-
-def _get_rclone_async() ->RcloneAsync:
-    return RcloneAsync()
 
 def _get_rclone_sync() ->RcloneActor:
     return RcloneActor()
@@ -15,9 +12,10 @@ def _get_rclone_sync() ->RcloneActor:
 def _get_my_p():
     return Path(__file__)
 
-def test__rclone_size1():
-    rclone = _get_rclone_async()
-    promise: ProcessHolder = rclone.size(str(_get_my_p()))
+def test__rclone_size1_async():
+    rclone = _get_rclone_sync()
+    upath = str(_get_my_p())
+    promise: ProcessHolder = rclone.size(upath, _async=True)
     the_size = promise.get_result()
     print(the_size)
     pass
