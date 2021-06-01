@@ -18,6 +18,10 @@ tasks:
       - task -l
     silent: true
 
+# md
+# This is a documentation comment.
+# /md
+
   test:
     desc: _
     cmds:

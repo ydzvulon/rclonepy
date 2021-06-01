@@ -1,12 +1,12 @@
 version: '3.2'
 services:
   mkdocs-live:
-    image: squidfunk/mkdocs-material
+    image: athackst/mkdocs-simple-plugin
     volumes:
       - "${PWD}/../..:/docs"
     ports:
       - "8800:8800"
-    command: ["serve"]
+    command: ["mkdocs serve"]
 
   site-live:
     image: pierrezemb/gostatic
