@@ -1,0 +1,7 @@
+[lms3]
+type = s3
+env_auth = false
+access_key_id = admin
+secret_access_key = password
+region = us-east-1
+endpoint = http://lms3:9000

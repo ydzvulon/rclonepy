@@ -1,0 +1,44 @@
+#!/usr/local/bin/task --taskfile
+
+version: '3.0'
+
+dotenv: ['.env']
+vars:
+  _sudo: $(which sudo &> /dev/null && echo sudo || echo '')
+  src_upath_fmt: |-
+    https://github.com/mikefarah/yq/releases/download/${YDT_YQ4__VERSION_STR:-${VERSION}}/${YDT_YQ4__BINARY_NAME:-${BINARY}}
+  tmp_dest_parent: /tmp/yq_install
+  dest_parent: /usr/local/bin
+  dest_name: yq4
+tasks:
+
+  default:
+    - task: download
+    - task: install
+
+  download: |-
+    echo ${YDT_YQ4__VERSION_STR}
+    # setup
+    echo "{{.src_upath_fmt}}"
+    # exit 1
+
+    tmp_name=$(basename $(echo "{{.src_upath_fmt}}"))
+    
+    # -- prevent same work
+    if [[ -e {{.tmp_dest_parent}}/${tmp_name} && "${tforce}" != "1" ]]; then
+      echo state=present path ={{.tmp_dest_parent}}/${tmp_name} >> /dev/stderr
+      exit 0
+    fi
+    # -- main
+    mkdir -p {{.tmp_dest_parent}}
+    wget {{.src_upath_fmt}} -O {{.tmp_dest_parent}}/${tmp_name}
+    chmod +x {{.tmp_dest_parent}}/${tmp_name}
+
+    echo "${tmp_name}" > {{.tmp_dest_parent}}/latest__tmp_name.token.txt
+
+  install: |-
+    tmp_name=$(cat {{.tmp_dest_parent}}/latest__tmp_name.token.txt) 
+    chmod +x {{.tmp_dest_parent}}/${tmp_name}
+    {{._sudo}} cp \
+    {{.tmp_dest_parent}}/${tmp_name} \
+    {{.dest_parent}}/{{.dest_name}}

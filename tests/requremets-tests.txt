@@ -1,3 +1,6 @@
 spur
 boto3
 s3path
+minio
+pytest
+pytest-parallel

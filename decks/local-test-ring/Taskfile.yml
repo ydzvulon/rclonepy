@@ -1,0 +1,20 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  _name_: deck tasks
+dotenv: ['.env']
+tasks:
+
+  docker:build:
+    desc: build deck image
+    dir: ../..
+    cmds:
+      - cmd: |-
+          docker -D build  \
+          -f ${DECK_PATH_KEY__DOCKERFILE} \
+          -t ${DECK_DIMAGE_MAIN__IMAGE} \
+          .
+  
+  
