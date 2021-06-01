@@ -14,7 +14,7 @@ services:
       - "../../confs/sample.rclone.conf/rclone.conf.guest-int-net.conf.toml:/_confs/rclone.conf"
     command: "bash -c 'cat /_confs/rclone.conf && rclone mkdir lms3:do-ob && rclone lsd lms3: | grep do-ob'"
 
-  test-package-102:
+  test-code-102:
     image: ${DECK_DIMAGE_MAIN__IMAGE}
     environment:
       - RCLONE_CONFIG=/src/confs/sample.rclone.conf/rclone.conf.guest-int-net.conf.toml
@@ -23,3 +23,11 @@ services:
     volumes: 
       - "../..:/src"
     command: "task run-all -d /src/tests"
+
+  build-package-103:
+    image: ${DECK_DIMAGE_MAIN__IMAGE}
+    environment:
+      - PYTHONPATH=/src
+    volumes: 
+      - "../..:/src"
+    command: "task pypi:clean:pypi pypi:build:pypi -d /src"
