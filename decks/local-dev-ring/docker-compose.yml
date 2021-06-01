@@ -1,0 +1,28 @@
+version: '3.2'
+
+networks:
+  default:
+    external: true
+    name: ${DECK_DCL_NETWORK}
+
+volumes:
+  lm_data:
+
+services:
+  lms3:
+    image: minio/minio
+    environment:
+      - MINIO_ROOT_USER=admin 
+      - MINIO_ROOT_PASSWORD=password
+    ports:
+      - "${DECK_lms3_PORT}:9000"
+    volumes:
+      - "lm_data:/data:rw"
+    command: server /data
+
+  lmhttp:
+    image: pierrezemb/gostatic
+    volumes:
+      - "lm_data:/srv/http:ro"
+    ports:
+      - "8043:8043"

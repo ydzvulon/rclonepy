@@ -1,0 +1,71 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  spin:up:
+    desc: _
+    cmds:
+      - docker-compose up -d
+      # - docker-compose up -d
+
+  spin:exec: 
+    desc: _
+    cmds:
+      - docker-compose exec mkdocs-live {{.cmd}}
+  
+  mkdocs:build:
+    desc: +
+    cmds:
+      - task: spin:exec
+        vars:
+          cmd: mkdocs build
+  
+  rclone:
+    desc: +
+    cmds:
+      - |-
+        rclone --config {{.cmd}}
+  
+  text:mkdocs-dest_upath:
+    desc: +
+    vars:
+      _to_text_lines: |-
+        | pup 'article json{}' | yq e '.[] | .children | .[] | .text' -
+    cmds:
+      - cmd: |-
+          curl {{.dest_upath}} {{._to_text_lines}} {{.cmd_suff}}
+
+  links:mkdocs-dest_upath:
+    desc: +
+    vars:
+      _to_text_lines: |-
+        | pup 'a.md-nav__link attr{href}' 
+    cmds:
+      - cmd: |-
+          curl {{.dest_upath}} {{._to_text_lines}} {{.cmd_suff}}
+
+  dump:mkdocs-live:
+    desc: +
+    vars:
+      subp: mkdocs-live
+    env:
+      dest_upath: http://localhost:8000
+    cmds:
+      - mkdir -p _out_/{{.subp}}
+      - task text:mkdocs-dest_upath | tee _out_/{{.subp}}/text.txt
+      - task links:mkdocs-dest_upath | tee _out_/{{.subp}}/links.txt
+
+  dump:mkdocs-site:
+    desc: +
+    vars:
+      subp: mkdocs-site    
+    env:
+      dest_upath: http://localhost:8043
+    cmds:
+      - mkdir -p _out_/{{.subp}}
+      - task text:mkdocs-dest_upath | tee _out_/{{.subp}}/text.txt
+      - task links:mkdocs-dest_upath | tee _out_/{{.subp}}/links.txt

@@ -1,0 +1,16 @@
+version: '3.2'
+services:
+  mkdocs-live:
+    image: squidfunk/mkdocs-material
+    volumes:
+      - "${PWD}/../..:/docs"
+    ports:
+      - "8800:8000"
+    command: ["serve"]
+
+  site-live:
+    image: pierrezemb/gostatic
+    volumes:
+      - "${PWD}/../../relrepos/yairdar.github.io:/srv/http"
+    ports:
+      - "8843:8043"

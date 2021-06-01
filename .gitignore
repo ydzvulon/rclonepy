@@ -1,9 +1,16 @@
+#
+__blobs__
+__localbuild__
+__build_info
+relrepos
+.task
+_out_
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 .vscode
-.task
 # C extensions
 *.so
 

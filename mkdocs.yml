@@ -1,0 +1,6 @@
+site_name: Material for MkDocs
+dev_addr: 0.0.0.0:8000
+site_dir: relrepos/yairdar.github.io
+
+theme:
+  name: 'material'

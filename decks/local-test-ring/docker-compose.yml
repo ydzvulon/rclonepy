@@ -1,0 +1,15 @@
+version: '3.2'
+
+networks:
+  default:
+    external: true
+    name: ${DECK_DCL_NETWORK}
+
+services:
+  test-e2e:
+    image: ${DECK_DIMAGE_MAIN__IMAGE}
+    environment:
+      - RCLONE_CONFIG=/_confs/rclone.conf
+    volumes: 
+      - "./rclone.conf.local-brigde.toml:/_confs/rclone.conf"
+    command: "bash -c 'cat /_confs/rclone.conf && rclone mkdir lms3:do-ob && rclone lsd lms3: | grep do-ob'"
