@@ -5,7 +5,7 @@ services:
     volumes:
       - "${PWD}/../..:/docs"
     ports:
-      - "8800:8000"
+      - "8800:8800"
     command: ["serve"]
 
   site-live:

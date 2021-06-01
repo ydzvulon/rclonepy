@@ -17,6 +17,11 @@ tasks:
     cmds:
       - docker-compose exec mkdocs-live {{.cmd}}
   
+  #     mkdocs:build:
+  # desc: _
+  # cmds:
+  #   - task spin:exec deck=decks/mkdocs-live cmd='"mkdocs build"'
+
   mkdocs:build:
     desc: +
     cmds:
@@ -53,7 +58,7 @@ tasks:
     vars:
       subp: mkdocs-live
     env:
-      dest_upath: http://localhost:8000
+      dest_upath: http://localhost:8800
     cmds:
       - mkdir -p _out_/{{.subp}}
       - task text:mkdocs-dest_upath | tee _out_/{{.subp}}/text.txt
@@ -64,7 +69,7 @@ tasks:
     vars:
       subp: mkdocs-site    
     env:
-      dest_upath: http://localhost:8043
+      dest_upath: http://localhost:8843
     cmds:
       - mkdir -p _out_/{{.subp}}
       - task text:mkdocs-dest_upath | tee _out_/{{.subp}}/text.txt
