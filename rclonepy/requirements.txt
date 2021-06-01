@@ -1,2 +1,4 @@
 spur
 "paramiko>=1.13.1,<3"
+pydantic
+pyyaml

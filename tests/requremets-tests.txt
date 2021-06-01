@@ -4,3 +4,6 @@ s3path
 minio
 pytest
 pytest-parallel
+twine
+pydantic
+pyyaml

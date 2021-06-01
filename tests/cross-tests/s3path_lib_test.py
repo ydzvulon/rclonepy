@@ -1,11 +1,16 @@
+
+
 def test__s3path__api():
+    import os
     import s3path
     import boto3
     from s3path import PureS3Path, register_configuration_parameter, S3Path
     from botocore.client import Config
+    
+    DECK_lms3_ENDPOINT = os.environ.get('DECK_lms3_ENDPOINT', 'http://localhost:27007')
     minio_resource = boto3.resource(
         's3',
-        endpoint_url='http://localhost:27007',
+        endpoint_url=DECK_lms3_ENDPOINT,
         aws_access_key_id='admin',
         aws_secret_access_key='password',
         config=Config(signature_version='s3v4'),

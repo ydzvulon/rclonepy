@@ -6,10 +6,19 @@ networks:
     name: ${DECK_DCL_NETWORK}
 
 services:
-  test-e2e-101:
+  test-docker-101:
     image: ${DECK_DIMAGE_MAIN__IMAGE}
     environment:
       - RCLONE_CONFIG=/_confs/rclone.conf
     volumes: 
       - "../../confs/sample.rclone.conf/rclone.conf.guest-int-net.conf.toml:/_confs/rclone.conf"
     command: "bash -c 'cat /_confs/rclone.conf && rclone mkdir lms3:do-ob && rclone lsd lms3: | grep do-ob'"
+
+  test-package-102:
+    image: ${DECK_DIMAGE_MAIN__IMAGE}
+    environment:
+      - RCLONE_CONFIG=/src/confs/sample.rclone.conf/rclone.conf.guest-int-net.conf.toml
+      - PYTHONPATH=/src
+    volumes: 
+      - "../..:/src"
+    command: "task run-all -d /src/tests"

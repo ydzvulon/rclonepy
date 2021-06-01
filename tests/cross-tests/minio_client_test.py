@@ -13,11 +13,22 @@ def test__minio_basic():
     # secret_access_key = password
     # region = us-east-1
     # endpoint = http://127.0.0.1:27007
+    import os
+    DECK_lms3_ENDPOINT = os.environ.get('DECK_lms3_ENDPOINT', 'http://localhost:27007')
+    if DECK_lms3_ENDPOINT.startswith('https'):
+        secure = True
+        ep = DECK_lms3_ENDPOINT.split('://')[1]
+    elif DECK_lms3_ENDPOINT.startswith('http'):
+        secure = False
+        ep = DECK_lms3_ENDPOINT.split('://')[1]
+    else:
+        secure = False
+        ep = "127.0.0.1:27007"
     client = Minio(
-        "127.0.0.1:27007",
+        ep,
         access_key="admin",
         secret_key="password",
-        secure=False
+        secure=secure
     )
 
     # Make 'asiatrip' bucket if not exist.

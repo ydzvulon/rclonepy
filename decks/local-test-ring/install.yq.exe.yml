@@ -2,7 +2,10 @@
 
 version: '3.0'
 
-dotenv: ['.env']
+env:
+  YDT_YQ4__VERSION_STR: v4.9.0
+  YDT_YQ4__BINARY_NAME: yq_linux_amd64
+
 vars:
   _sudo: $(which sudo &> /dev/null && echo sudo || echo '')
   src_upath_fmt: |-

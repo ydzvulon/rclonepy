@@ -17,6 +17,7 @@ RUN  cd /tmp/ \
 RUN  ls /usr/local/bin/task
 
 COPY decks/local-test-ring/install.yq.exe.yml /decks/_install_scripts/install.yq.exe.yml
+COPY decks/local-test-ring/.env /decks/_install_scripts/.env
 
 RUN task -t /decks/_install_scripts/install.yq.exe.yml -o prefixed
 RUN yq4 -V
@@ -25,3 +26,10 @@ RUN curl https://rclone.org/install.sh | bash
 RUN rclone version
 
 RUN  echo 
+
+COPY rclonepy/requirements.txt /decks/_install_scripts/requirements.run.list.txt
+COPY tests/requremets-tests.txt /decks/_install_scripts/requirements.test.list.txt
+
+RUN cd /decks/_install_scripts/ \
+    pip install -r requirements.run.list.txt \
+    && pip install -r requirements.test.list.txt
