@@ -10,7 +10,22 @@ site_dir: relrepos/yairdar.github.io/rclonepy
 theme:
   name: material
   palette:
-    primary: gray
-    accent: gray
+    - media: "(prefers-color-scheme: dark)"
+      scheme: default
+      primary: lime
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: slate
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+
 markdown_extensions:
   - admonition
+
+
+    #   primary: lime
+    # accent: indigo
