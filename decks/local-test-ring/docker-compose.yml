@@ -19,6 +19,7 @@ services:
     environment:
       - RCLONE_CONFIG=/src/confs/sample.rclone.conf/rclone.conf.guest-int-net.conf.toml
       - PYTHONPATH=/src
+      - DECK_lms3_ENDPOINT=http://lms3:9000
     volumes: 
       - "../..:/src"
     command: "task run-all -d /src/tests"
