@@ -4,4 +4,5 @@
 
 !!! note "Some Note"
     Hello
+
 ## Bonuses
