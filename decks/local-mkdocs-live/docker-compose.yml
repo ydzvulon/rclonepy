@@ -6,7 +6,7 @@ services:
       - "${PWD}/../..:/docs"
     ports:
       - "8800:8800"
-    command: ["mkdocs serve"]
+    command: ["mkdocs", "serve"]
 
   site-live:
     image: pierrezemb/gostatic

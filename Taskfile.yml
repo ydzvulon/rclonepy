@@ -18,11 +18,12 @@ tasks:
       - task -l
     silent: true
 
-# md
-# This is a documentation comment.
-# /md
-
   test:
     desc: _
+    # md
+    # > Run tests with task test
+    #
+    # - currently bonded env 
+    # /md
     cmds:
       - task run-all:full -d tests

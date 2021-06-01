@@ -2,4 +2,6 @@
 
 ## Available Plagins
 
+!!! note "Some Note"
+    Hello
 ## Bonuses

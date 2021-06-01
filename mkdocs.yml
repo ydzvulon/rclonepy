@@ -3,8 +3,14 @@ docs_dir: /docs/docs
 plugins: !!python/tuple
   - simple
   - search
+  # - awesome-pages
 edit_uri: ''
 dev_addr: 0.0.0.0:8800
 site_dir: relrepos/yairdar.github.io/rclonepy
 theme:
   name: material
+  palette:
+    primary: gray
+    accent: gray
+markdown_extensions:
+  - admonition
