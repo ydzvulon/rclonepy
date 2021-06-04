@@ -12,10 +12,19 @@ import spur
 from rclonepy.cmds.rclone_tree import tree
 from rclonepy.ifaces.shell_actor_iface import ProcIface, ShellActorIface
 
+def foo(self):
+    "sadf"
+    return 0
+
+class Tiger:
+    pass
+
 class ProcessHolder:
     def __init__(self, seed, process: ProcIface) -> None:
         self.seed = seed
         self.proceess = process
+
+    foo = Tiger
     
     def get_result(self, **kw):
         res_raw = self.proceess.wait_for_result()

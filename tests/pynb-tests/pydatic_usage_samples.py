@@ -2,7 +2,7 @@
 
 import re
 from sys import flags
-from typing import Optional
+from typing import Any, Optional
 import pydantic
 from typing_extensions import Literal
 
@@ -61,3 +61,29 @@ c.get_cmd_args()
 # %%
 d=RcloneInfraInfo(source='.')
 d.get_cmd_args()
+
+# %%
+
+def doo(self, p):
+    return p
+
+class Da:
+    def __call__(self, *args, **kwds):
+        print(self.x)
+        return args
+
+# %%
+class A:
+    p = 3
+    def foo(self, x):
+        return x
+    doo = doo
+
+    da = Da()
+ 
+
+# %%
+a = A()
+# %%
+a.da()
+# %%
